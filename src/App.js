@@ -10,7 +10,7 @@ import Progres from "./Progres";
 import Finshed from "./Finshed";
 import Footer from "./Footer";
 import Timer from "./Timer";
-
+const SecP = 30;
 const initialValue = {
   questions: [],
   status: "loading",
@@ -18,7 +18,7 @@ const initialValue = {
   answer: null,
   points: 0,
   highScore: 0,
-  sec: 10,
+  sec: null,
 };
 
 function reducer(state, action) {
@@ -28,7 +28,7 @@ function reducer(state, action) {
     case "dataFailed":
       return { ...state, status: "Error" };
     case "start":
-      return { ...state, status: "active" };
+      return { ...state, status: "active", sec: state.questions.length * SecP };
     case "newAnswer":
       const question = state.questions.at(state.index);
       return {
